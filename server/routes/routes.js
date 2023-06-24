@@ -51,16 +51,8 @@ todoRouter.put('/:id', (req, res) => {
 })
 });
 
-todoRouter.post('/', (req,res) => {
-
-    
-})
 
 
-todoRouter.delete('/', (req,res) => {
-
-    
-})
 
 
 

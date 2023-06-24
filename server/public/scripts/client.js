@@ -6,6 +6,21 @@ $(document).ready(function () {
 });
 
 
+function deleteTask(){
+    let idToUpdate = $(this).closest("tr").find("th[data-id]").data("id");
+    $.ajax({
+        type: "DELETE",
+        url: `/tasks/${idToUpdate}`,
+      })
+        .then((response) => {
+          console.log("Task is deleted", response);
+          getTasks()
+        })
+        .catch((error) => {
+          console.log("Complete", error);
+        });
+}
+
 function getTasks(){
   $.ajax({
     type: "GET",
@@ -20,7 +35,6 @@ function getTasks(){
 
 function completeTask() {
     let idToUpdate = $(this).closest("tr").find("th[data-id]").data("id");
-    console.log(idToUpdate)
     $.ajax({
       type: "PUT",
       url: `/tasks/${idToUpdate}`,
@@ -71,10 +85,15 @@ console.log("in post task")
         })
         .then((result) => {
           if (result.isConfirmed) {
+            const currentDate = new Date();
+            const year = currentDate.getFullYear();
+            const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+            const day = String(currentDate.getDate()).padStart(2, '0');
+            const formattedDate = `${year}-${month}-${day}`;
             let taskObject = {
               task: $("#form1").val(),
               completed: false,
-              date: new Date()
+              date: formattedDate
             };
             $.ajax({
               method: "POST",
