@@ -16,11 +16,20 @@ todoRouter.get('/', (req,res) => {
 })
 
 
-todoRouter.put('/', (req,res) => {
-
-    
+todoRouter.put('/:id', (req, res) => {
+    const idToUpdate = req.params.id
+    let query = `UPDATE "tasks" SET "completed" = NOT "completed"
+    WHERE id = $1;`;
+    pool.query(query, [idToUpdate])
+.then((results) => {
+    console.log("Success Updating Task")
+    res.sendStatus(200)
 })
-
+.catch((error) => {
+    console.log('error making DB query', error)
+    res.sendStatus(500)
+})
+});
 
 todoRouter.post('/', (req,res) => {
 

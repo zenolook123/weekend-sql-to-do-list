@@ -1,6 +1,7 @@
 $(document).ready(function () {
     console.log("JQ")
     getTasks()
+    $("#task-body").on('click', '.btn.btn-success.ms-1', completeTask )
 });
 
 
@@ -16,6 +17,20 @@ function getTasks(){
   });
 }
 
+function completeTask() {
+    let idToUpdate = $(this).closest("tr").data("id");;
+    $.ajax({
+      type: "PUT",
+      url: `/tasks/${idToUpdate}`,
+    })
+      .then((response) => {
+        console.log("Completed task is set to true", response);
+        getTasks()
+      })
+      .catch((error) => {
+        console.log("Complete", error);
+      });
+}
 
 function renderTasks(tasks) {
     $("#task-body").empty();
@@ -32,7 +47,6 @@ function renderTasks(tasks) {
                         </td>
                         <td>${task.date.split('T')[0]}</td>
                       </tr>
-      </tr>
       `);
   
       $("#task-body").append(newRow);
