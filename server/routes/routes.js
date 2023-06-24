@@ -21,11 +21,10 @@ todoRouter.post('/', (req, res) => {
 
     let todo = req.body.task;
     let taskCompleted = req.body.completed;
-    let dateCompleted = req.body.date.split('T')[0];
 
-    const query = `INSERT INTO "tasks" ("task", "completed", "date") VALUES ($1, $2, $3);`
+    const query = `INSERT INTO "tasks" ("task", "completed") VALUES ($1, $2);`
 
-    pool.query(query, [todo,taskCompleted,dateCompleted])
+    pool.query(query, [todo,taskCompleted])
     .then((result) => {
         console.log("Task inserted into task database.");
         res.sendStatus(201);

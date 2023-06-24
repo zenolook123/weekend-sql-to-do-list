@@ -65,7 +65,6 @@ function renderTasks(tasks) {
                           <button type="submit" class="btn btn-danger">Delete</button>
                           <button type="submit" class="btn btn-success ms-1">Finish</button>
                         </td>
-                        <td>${task.date.split('T')[0]}</td>
                       </tr>
       `);
       let newRow = $(`
@@ -77,7 +76,6 @@ function renderTasks(tasks) {
                           <button type="submit" class="btn btn-danger">Delete</button>
                           <button type="submit" class="btn btn-success ms-1">Finish</button>
                         </td>
-                        <td>${task.date.split('T')[0]}</td>
                       </tr>
       `);
   
@@ -107,15 +105,9 @@ console.log("in post task")
         })
         .then((result) => {
           if (result.isConfirmed) {
-            const currentDate = new Date();
-            const year = currentDate.getFullYear();
-            const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-            const day = String(currentDate.getDate()).padStart(2, '0');
-            const formattedDate = `${year}-${month}-${day}`;
             let taskObject = {
               task: $("#form1").val(),
-              completed: false,
-              date: formattedDate
+              completed: false
             };
             $.ajax({
               method: "POST",
