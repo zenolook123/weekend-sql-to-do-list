@@ -18,9 +18,9 @@ SQL
 
 [x]create a database called "weekend-to-do-app"
 
-create a database.sql file that includes any SQL Querys we will use
+[x]create a database.sql file that includes any SQL Querys we will use
 
-each task's true/false if checked off should reflect in DB
+[x]each task's true/false if checked off should reflect in DB
 
 deleting a task should delete it from front and and database
 

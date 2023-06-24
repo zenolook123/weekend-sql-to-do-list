@@ -4,3 +4,5 @@ CREATE TABLE "tasks" (
 	"completed" boolean default false,
 	"date" DATE
 	);
+
+
