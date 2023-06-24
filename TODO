@@ -2,11 +2,11 @@ HTML/CSS
 
 [x]import bootstrap, jquery, css, client  COMMIT
 
-make a table of todo's with inputs above all of which have both options to complete or delete COMMIT
+[x]make a table of todo's with inputs above all of which have both options to complete or delete COMMIT
 
-visual representation of color changing with task change (set id/class based off true or false) COMMIT
+[x]visual representation of color changing with task change (set id/class based off true or false) COMMIT
 
-font family/size, background color of page, text color COMMIT
+[x]font family/size, background color of page, text color COMMIT
 
 Are you sure? yes/no button COMMIT
 
@@ -16,7 +16,7 @@ completion date/time
 
 SQL
 
-create a database called "weekend-to-do-app"
+[x]create a database called "weekend-to-do-app"
 
 create a database.sql file that includes any SQL Querys we will use
 
@@ -30,10 +30,9 @@ deleting a task should delete it from front and and database
 
 TERMINAL
 
-NPM INSTALL PG,EXPRESS,BODY-PARSER
+[x]NPM INSTALL PG,EXPRESS,BODY-PARSER
 
 
 
 
 
-S
