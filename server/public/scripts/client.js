@@ -3,23 +3,11 @@ $(document).ready(function () {
     getTasks()
     $("#task-body").on('click', '.btn.btn-success.ms-1', completeTask )
     $("#save-button").on('click', postTask)
+    $("#task-body").on('click', '.btn.btn-danger', deleteTask)
 });
 
 
-function deleteTask(){
-    let idToUpdate = $(this).closest("tr").find("th[data-id]").data("id");
-    $.ajax({
-        type: "DELETE",
-        url: `/tasks/${idToUpdate}`,
-      })
-        .then((response) => {
-          console.log("Task is deleted", response);
-          getTasks()
-        })
-        .catch((error) => {
-          console.log("Complete", error);
-        });
-}
+
 
 function getTasks(){
   $.ajax({
@@ -35,6 +23,7 @@ function getTasks(){
 
 function completeTask() {
     let idToUpdate = $(this).closest("tr").find("th[data-id]").data("id");
+    console.log(idToUpdate)
     $.ajax({
       type: "PUT",
       url: `/tasks/${idToUpdate}`,
@@ -48,11 +37,26 @@ function completeTask() {
       });
 }
 
+function deleteTask(){
+    let idToUpdate = $(this).closest("tr").find("th[data-id]").data("id");
+    console.log(idToUpdate)
+    $.ajax({
+        type: "DELETE",
+        url: `/tasks/${idToUpdate}`,
+      })
+        .then((response) => {
+          console.log("Task is deleted", response);
+          getTasks()
+        })
+        .catch((error) => {
+          console.log("Error deleting task in client", error);
+        });
+}
 function renderTasks(tasks) {
     $("#task-body").empty();
     for (let i = 0; i < tasks.length; i += 1) {
       let task = tasks[i];
-      let newRow = $(`
+      let newRowNotComplete = $(`
       <tr class="table-danger">
                         <th scope="row" data-id = ${task.id}>${task.id}</th>
                         <td>${task.task}</td>
@@ -64,8 +68,26 @@ function renderTasks(tasks) {
                         <td>${task.date.split('T')[0]}</td>
                       </tr>
       `);
+      let newRow = $(`
+      <tr class="table-success">
+                        <th scope="row" data-id = ${task.id}>${task.id}</th>
+                        <td>${task.task}</td>
+                        <td>${task.completed}</td>
+                        <td>
+                          <button type="submit" class="btn btn-danger">Delete</button>
+                          <button type="submit" class="btn btn-success ms-1">Finish</button>
+                        </td>
+                        <td>${task.date.split('T')[0]}</td>
+                      </tr>
+      `);
   
-      $("#task-body").append(newRow);
+        if (task.completed == true) {
+            $("#task-body").append(newRow);
+        } else {
+            $("#task-body").append(newRowNotComplete);
+        }
+    
+      
     }
   } // end renderTasks
 

@@ -51,6 +51,21 @@ todoRouter.put('/:id', (req, res) => {
 })
 });
 
+todoRouter.delete('/:id', (req,res) => {
+    let idToDelete = req.params.id;
+
+    let query = `DELETE FROM "tasks" WHERE "id" = $1`
+
+    pool.query(query, [idToDelete])
+    .then((results) => {
+        console.log("Task Deleted.");
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log("Error making database query:", error);
+        res.sendStatus(500);
+    })
+    
+})
 
 
 
