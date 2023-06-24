@@ -15,9 +15,29 @@ todoRouter.get('/', (req,res) => {
 
 })
 
+todoRouter.post('/', (req, res) => {
+    let task = req.body
+    console.log("Inside POST /, req.body:", task);
+
+    let todo = req.body.task;
+    let taskCompleted = req.body.completed;
+    let dateCompleted = req.body.date.split('T')[0];
+
+    const query = `INSERT INTO "tasks" ("task", "completed", "date") VALUES ($1, $2, $3);`
+
+    pool.query(query, [todo,taskCompleted,dateCompleted])
+    .then((result) => {
+        console.log("Task inserted into task database.");
+        res.sendStatus(201);
+    }).catch((error) => {
+        console.log(`Error making query: ${query}`, error);
+        res.sendStatus(500);
+    })
+});
 
 todoRouter.put('/:id', (req, res) => {
     const idToUpdate = req.params.id
+    console.log(req.params)
     let query = `UPDATE "tasks" SET "completed" = NOT "completed"
     WHERE id = $1;`;
     pool.query(query, [idToUpdate])
