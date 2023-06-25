@@ -1,7 +1,6 @@
 const pg = require('pg');
 
 // Setting up pg to connect to the database
-// Creating Koala database pool
 const pool = new pg.Pool({
     database: 'weekend-to-do-app',
     host: 'localhost',
