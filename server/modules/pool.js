@@ -4,7 +4,7 @@ const pg = require('pg');
 let pool;
 if (process.env.DATABASE_URL) {
     pool = new pg.Pool ({
-        connectionSting: process.env.DATABASE_URL,
+        connectionString: process.env.DATABASE_URL,
         ssl: {
             rejectUnauthorized:false
         }
