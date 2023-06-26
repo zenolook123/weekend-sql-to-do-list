@@ -1,7 +1,7 @@
 const pg = require('pg');
 
 // Setting up pg to connect to the database
-console.log(process.env.DATABASE_URL);
+let pool;
 if (process.env.DATABASE_URL) {
     pool = new pg.Pool ({
         connectionSting: process.env.DATABASE_URL,
