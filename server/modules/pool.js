@@ -2,7 +2,7 @@ const pg = require('pg');
 
 // Setting up pg to connect to the database
 if (process.env.DATABASE_URL) {
-    pool = new pg.pool ({
+    pool = new pg.Pool ({
         connectionSting: process.env.DATABASE_URL,
         ssl: {
             rejectUnauthorized:false
